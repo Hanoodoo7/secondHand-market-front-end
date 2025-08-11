@@ -6,6 +6,7 @@ const SignUp = (props) => {
 
   const initialState = {
     username: '',
+    email:'',
     password: '',
     passwordConf: '',
   }
@@ -51,13 +52,16 @@ const SignUp = (props) => {
       {error}
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
-        <input type="text" name='username' onChange={handleChange} />
+        <input type="text" name='username' onChange={handleChange} required/>
+        <br />
+        <label>E-mail:</label>
+        <input type="text" name='email' onChange={handleChange} />
         <br />
         <label>Password:</label>
-        <input type="password" name='password' onChange={handleChange} />
+        <input type="password" name='password' onChange={handleChange} required/>
         <br />
         <label>Confirm Password:</label>
-        <input type="password" name="passwordConf" onChange={handleChange} />
+        <input type="password" name="passwordConf" onChange={handleChange} required/>
         <br />
         <button type="submit" disabled={formIsInvalid}>Sign up</button>
       </form>

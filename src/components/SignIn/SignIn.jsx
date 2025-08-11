@@ -7,6 +7,7 @@ const SignIn = (props) => {
   const initialState = {
     username: '',
     password: '',
+    email: '',
   }
 
   const [formData, setFormData] = useState(initialState)
@@ -33,6 +34,9 @@ const SignIn = (props) => {
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
         <input type="text" name='username' onChange={handleChange} />
+        <br />
+        <label>E-mail:</label>
+        <input type="email" name='email' onChange={handleChange} />
         <br />
         <label>Password:</label>
         <input type="password" name='password' onChange={handleChange} />
