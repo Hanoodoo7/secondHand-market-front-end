@@ -29,12 +29,13 @@ const itemDetails = (props) => {
     <main>
       <header>
         <p>{Item.category.toUpperCase()}</p>
-        <h1>{Item.title}</h1>
+        <h1>{Item.title} - {Item.price}BDH </h1>
         <p>
           {Item.seller.username} posted on {new Date(Item.createdAt).toLocaleDateString()}
         </p>
         <p>
             {/* I'll put the image here later */}
+            {Item.condition} - {Item.status}
         </p>
         <p>
           {Item.description}
