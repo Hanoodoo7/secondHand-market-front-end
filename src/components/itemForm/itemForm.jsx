@@ -50,3 +50,9 @@
 
     setUploading(false);
 };
+
+// Stop the page from reloading
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    console.log("Here is the form data:", formData);
+  };
