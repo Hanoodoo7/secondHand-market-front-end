@@ -2,6 +2,7 @@
 
     const itemForm = () => {
     const [formData, setFormData] = useState({
+        PhoneNumber: "",
         title: "",            
         description: "",      
         category: "Other",     
@@ -94,14 +95,25 @@ return (
       </select>
       </div>
 
-<div className="form-group">
-    <input
-        type="number"  className="vintage-input"
-        name="price"
-        placeholder="Enter price"
-        value={formData.price}
-        onChange={handleChange}
-        required
+    <div className="form-group">
+        <input
+            type="number"  className="vintage-input"
+            name="price"
+            placeholder="Enter price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+      />
+      </div>
+
+       <div className="form-group">
+        <input
+            type="number"  className="vintage-input"
+            name="PhoneNumber"
+            placeholder="Enter Phone Number"
+            value={formData.PhoneNumber}
+            onChange={handleChange}
+            required
       />
       </div>
 
