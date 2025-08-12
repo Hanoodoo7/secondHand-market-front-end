@@ -29,22 +29,50 @@ const SignIn = (props) => {
   }
 
   return (
-    <main>
-      <h1>Sign In Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input type="text" name='username' onChange={handleChange} />
+    <div className="auth-container">
+      <div className="vintage-decoration top-right"> ҉ </div>
+      <div className="auth-header">
+        <h1>Welcome Back</h1>
+        <p>Sign In...... think of something clever to put here</p>
+      </div>
+ <form onSubmit={handleSubmit} className="auth-form">
+        <div className="form-group">
+          <label>Username:</label>
+          <input 
+            type="text" 
+            name="username" 
+            onChange={handleChange}
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Email:</label>
+          <input 
+            type="email" 
+            name="email" 
+            onChange={handleChange}
+            placeholder="email@provider.com"
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <label>Password:</label>
+          <input 
+            type="password" 
+            name="password" 
+            onChange={handleChange}
+            placeholder="••••••••"
+            required
+          />
+        </div>
         <br />
-        <label>E-mail:</label>
-        <input type="email" name='email' onChange={handleChange} />
-        <br />
-        <label>Password:</label>
-        <input type="password" name='password' onChange={handleChange} />
-        <br />
-        <button type="submit">Sign In</button>
+        <button type="submit" className="auth-button">Sign In</button>
       </form>
-    </main>
-  )
-}
+    </div>
+  );
+};
 
 export default SignIn

@@ -45,28 +45,63 @@ const SignUp = (props) => {
     formIsInvalid = false
   }
 
-  return (
-    <main>
-      <h1>Sign up Form</h1>
-      {/* add error message display to form */}
-      {error}
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input type="text" name='username' onChange={handleChange} required/>
+   return (
+    <div className="auth-container">
+      <div className="vintage-decoration top-right"> ҉</div>
+      <div className="auth-header">
+        <h1>Join Our Community</h1>
+        <p>Shop Second-Hand.</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+          <label>Username:</label>
+          <input 
+            type="text" 
+            name="username" 
+            onChange={handleChange}
+            placeholder="Choose a username"
+            required
+          />
+        </div>
+
+          <div className="form-group">
+          <label>Email:</label>
+          <input 
+            type="email" 
+            name="email" 
+            onChange={handleChange}
+            placeholder="email@provider.com"
+          />
+        </div>
+        
+        <div className="form-group">
+          <label>Password:</label>
+          <input 
+            type="password" 
+            name="password" 
+            onChange={handleChange}
+            placeholder="••••••••"
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <label>Confirm Password:</label>
+          <input 
+            type="password" 
+            name="passwordConf" 
+            onChange={handleChange}
+            placeholder="••••••••"
+            required
+          />
+          </div>
+
         <br />
-        <label>E-mail:</label>
-        <input type="text" name='email' onChange={handleChange} />
-        <br />
-        <label>Password:</label>
-        <input type="password" name='password' onChange={handleChange} required/>
-        <br />
-        <label>Confirm Password:</label>
-        <input type="password" name="passwordConf" onChange={handleChange} required/>
-        <br />
-        <button type="submit" disabled={formIsInvalid}>Sign up</button>
+        <button type="submit" className="auth-button" disabled={formIsInvalid}>Sign up</button>
       </form>
-    </main>
-  )
-}
+    </div>
+  );
+};
 
 export default SignUp
