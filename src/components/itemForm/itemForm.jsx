@@ -13,6 +13,8 @@
      });
 
     const [uploading, setUploading] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false)
+
 
     const handleChange = (event) => {
     setFormData({...formData, [event.target.name]: event.target.value });
@@ -32,16 +34,16 @@
 
 
     try {
-      const res = await fetch(`https://api.cloudinary.com/v1_1/dbtxztzci/image/upload`, {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/dbtxztzci/images/upload`, {
         method: "POST",
         body: data
       });
 
       const uploaded = await res.json();
 
-      setFormData({ ...formData, image: uploaded.secure_url });
+      setFormData({ ...formData, images: uploaded.secure_url });
     } catch (error) {
-      console.error("Image upload failed", error);
+      console.error("Images upload failed", error);
         }
     }
 
@@ -102,11 +104,11 @@ return (
       </select>
 
 
-    <input type="file" accept="image/*" onChange={handleImageUpload} />
-      {uploading && <p>Uploading image...</p>}
-      {formData.image && (
+    <input type="file" accept="images/*" onChange={handleImageUpload} />
+      {uploading && <p>Uploading images...</p>}
+      {formData.images && (
         <img
-          src={formData.image}
+          src={formData.images}
           alt="Uploaded Preview"
           width="100"
         />
@@ -122,6 +124,23 @@ return (
     <button type="submit" disabled={uploading}>
         Submit
       </button>
+
+
+      <button type="editForm" disabled={uploading} >
+        Edit Form
+      </button>
+
+      <button type="button" onClick={() => {
+        setIsEditMode(true)
+        setFormData({
+          title: existingItem.title,
+          description: existingItem.description,
+          price: existingItem.price
+        })
+}}>
+  Edit Item
+</button>
+
 
       </form>
       );

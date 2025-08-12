@@ -57,6 +57,9 @@ const SignUp = (props) => {
         <label>E-mail:</label>
         <input type="text" name='email' onChange={handleChange} />
         <br />
+        <label>Phone Number:</label>
+        <input type="number" name='phoneNumber' onChange={handleChange} />
+        <br />
         <label>Password:</label>
         <input type="password" name='password' onChange={handleChange} required/>
         <br />
