@@ -56,3 +56,31 @@
     event.preventDefault(); 
     console.log("Here is the form data:", formData);
   };
+
+return (
+    <form onSubmit={handleSubmit}>
+      <input
+        name="title"
+        placeholder="Enter item title"
+        value={formData.title}
+        onChange={handleChange}
+        required
+      />
+
+        <textarea
+        name="description"
+        placeholder="Describe the item"
+        value={formData.description}
+        onChange={handleChange}
+        required
+      />
+
+
+      <select name="category" value={formData.category} onChange={handleChange}>
+        <option value="cars">Cars</option>
+        <option value="books">Books</option>
+        <option value="sports equipment">Sports Equipment</option>
+      </select>
+
+      </form>
+)
