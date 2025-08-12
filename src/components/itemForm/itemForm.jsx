@@ -15,7 +15,6 @@
     const [uploading, setUploading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false)
 
-
     const handleChange = (event) => {
     setFormData({...formData, [event.target.name]: event.target.value });
         };
