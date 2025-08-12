@@ -46,7 +46,7 @@
     }
 
     setUploading(false);
-};
+
 
   const handleSubmit = (event) => {
     event.preventDefault(); 
@@ -106,11 +106,21 @@ return (
         />
       )}
     
-
+    <select name="status" value={formData.status} onChange={handleChange}>
+        <option value="available">Available</option>
+        <option value="pending">Pending</option>
+        <option value="sale">Sale</option>
+        <option value="sold">Sold</option>
+      </select>
     
 
+    <button type="submit" disabled={uploading}>
+        Submit
+      </button>
+
       </form>
-)
+      );
+};
     
   export default itemForm;
 
