@@ -12,77 +12,85 @@ import { useState, useEffect } from "react";
 
 
 const App = () => {
-  const initialState = authService.getUser();
 
-  const [user, setUser] = useState(initialState);
-  const [items, setItems] = useState([]);
+  const navigate = useNavigate()
+
+  const initialState = authService.getUser()
+
+  const [user, setUser] = useState(initialState)
+  const [items, setItems] = useState([])
 
   useEffect(() => {
     const fetchAllItems = async () => {
-      const itemsData = await itemService.index();
-      console.log("itemsData:", itemsData);
-    };
-    if (user) fetchAllItems();
-  }, [user]);
+      const itemsData = await itemService.index()
+      setItems(itemsData)
+    }
+    fetchAllItems()
+  }, [])
+
 
   const handleSignUp = async (formData) => {
     try {
-      const res = await authService.signUp(formData);
-      setUser(res);
-      // return success
-      return { success: true };
-    } catch (err) {
-      // return failure flag (then signup form can display message)
-      // add message?
-      return { success: false, message: err.message };
+      const res = await authService.signUp(formData)
+      setUser(res)
+      return { success: true }
+    } catch(err){
+      return { success: false, message: err.message }
     }
-  };
+  }
 
   const handleSignOut = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-  };
+    localStorage.removeItem('token')
+    setUser(null)
+  }
 
   const handleSignIn = async (formData) => {
-    const res = await authService.signIn(formData);
-    setUser(res);
-  };
+    const res = await authService.signIn(formData)
+    setUser(res)
+  }
 
   const handleAddItem = async (formData) => {
-    await itemService.create(formData);
-  };
+    await itemService.create(formData)
+  }
 
   const handleDeleteItem = async (itemId) => {
-    await itemService.deleteItem(itemId);
-    setItems(items.filter((item) => item._id !== itemId));
-    navigate("/item");
-  };
+    await itemService.deleteItem(itemId)
+    setItems(items.filter(item => item._id !== itemId))
+    navigate('/items')
+  }
 
-  const handleUpdateItem = async (formData, itemId) => {
-    const updatedItem = await itemService.update(formData, itemId);
-    navigate(`/item/${itemId}`);
-  };
-  
-  return (
-    <>
-    <h1>hello world</h1>
-      <NavBar user={user} handleSignOut={handleSignOut} />
-      <Routes>
-        <Route path="/" element={<h1>Hello world!</h1>} />
-        <Route
-          path="/sign-up"
-          element={<SignUp handleSignUp={handleSignUp} user={user} />}
-        />
-        <Route
-          path="/sign-in"
-          element={<SignIn handleSignIn={handleSignIn} user={user} />}
-        />
-        <Route path="/item" element={<ItemList items={items} />} />
-        <Route path="/item/:itemId" element={<ItemDetails />} />
-        <Route path="*" element={<h1>404</h1>} />
-      </Routes>
-    </>
-  );
+const handleUpdateItem = async (itemId, itemFormData) => {
+  const updatedItem = await itemService.update(itemId, itemFormData);
+  setItems(items.map((item) => (itemId === item._id ? updatedItem : item)));
+  navigate(`/items/${itemId}`);
 };
 
-export default App;
+  return (
+   // Private Routes
+    <>
+      <NavBar user={user} handleSignOut={handleSignOut} />
+      <Routes>
+          {user ? (
+            <>
+              <Route path='items/new' element={<itemForm handleAddItem={handleAddItem} />} />
+              <Route path='items/:itemId/edit' element={<itemForm handleUpdateItem={handleUpdateItem}/>}/>
+            </>
+          ) : (
+            
+            // Public Routes
+            <>
+              <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
+              <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
+            </>
+          )}
+          <Route path='/' element={<h1>Hello world!</h1>} />
+          <Route path='/items' element={<ItemList items={items} />} />
+          <Route path='/items/:itemId' element={<ItemDetails user={user} handleDeleteItem={handleDeleteItem} />} />
+          <Route path='*' element={<h1>404</h1>} />
+      </Routes>
+    </>
+
+  )
+}
+
+export default App
