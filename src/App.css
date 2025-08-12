@@ -1,42 +1,417 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* delete later. hex codes:   
+  gray-black thing: 343434 
+  gold: E6B31E
+  off-white: FCFAF1
+  light gray: CACACA*/ 
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', 'Times New Roman', serif;
+  background-color: #FCFAF1;
+  color: #343434;
+  background-image: url('./assets/cream-paper.png');
+}
+
+.navbar {
+  background-color: #343434;
+  padding: 1rem 2rem;
+  border-bottom: 3px solid #E6B31E;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 1px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-item {
+  color: #FCFAF1;
+  font-weight: normal;
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.nav-item:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  background: #E6B31E;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover:after {
+  width: 100%;
+}
+
+.welcome {
+  margin-right: auto;
+  color: #E6B31E;
+  font-style: italic;
+  text-transform: none;
+  font-size: 1rem;
+}
+
+.item-details-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.item-header {
+  background-color: #FCFAF1;
   padding: 2rem;
-  text-align: center;
+  border: 1px solid #CACACA;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  position: relative;
+  margin-bottom: 3rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.item-header:before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid #E6B31E;
+  z-index: -1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.item-header h1 {
+  color: #343434;
+  margin: 0.5rem 0;
+  font-size: 2rem;
+  font-weight: normal;
+  border-bottom: 1px dashed #CACACA;
+  padding-bottom: 0.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.item-meta {
+  font-style: italic;
+  color: #7a7a7a;
+  margin: 1rem 0;
 }
 
-.card {
-  padding: 2em;
+.item-description {
+  line-height: 1.8;
+  margin: 2rem 0;
 }
 
-.read-the-docs {
-  color: #888;
+.item-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.item-actions a, 
+.item-actions button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.item-actions a {
+  background-color: transparent;
+  color: #343434;
+  border: 1px solid #343434;
+  transition: all 0.3s ease;
+}
+
+.item-actions a:hover {
+  background-color: #343434;
+  color: #FCFAF1;
+}
+
+.item-actions button {
+  background-color: transparent;
+  color: #343434;
+  border: 1px solid #343434;
+}
+
+.item-actions button:hover {
+  background-color: #343434;
+  color: #FCFAF1;
+}
+
+.comments-section {
+  background-color: #FCFAF1;
+  padding: 2rem;
+  border: 1px solid #CACACA;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.05);
+}
+
+.comments-section h2 {
+  margin-top: 0;
+  color: #343434;
+  font-weight: normal;
+  font-size: 1.5rem;
+  border-bottom: 1px dashed #CACACA;
+  padding-bottom: 0.5rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #CACACA;
+  border-radius: 0;
+  min-height: 120px;
+  margin-bottom: 1rem;
+  font-family: 'Courier New', monospace;
+  background-color: rgba(252, 250, 241, 0.7);
+}
+
+.comment-form button {
+  background-color: transparent;
+  color: #343434;
+  border: 1px solid #343434;
+  padding: 0.5rem 2rem;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.comment-form button:hover {
+  background-color: #343434;
+  color: #FCFAF1;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+
+.comment-item {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(252, 250, 241, 0.7);
+  border-left: 3px solid #E6B31E;
+  position: relative;
+}
+
+.comment-item:before {
+  content: '"';
+  position: absolute;
+  font-size: 4rem;
+  color: rgba(202, 202, 202, 0.3);
+  top: 0;
+  left: 10px;
+  line-height: 1;
+}
+
+.comment-text {
+  font-style: italic;
+  line-height: 1.8;
+  margin: 0 0 0.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.comment-author {
+  color: #7a7a7a;
+  font-size: 0.8rem;
+  display: block;
+  text-align: right;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}
+
+.comment-actions button {
+  padding: 0.25rem 1rem;
+  font-size: 0.8rem;
+  border-radius: 0;
+  border: 1px solid #CACACA;
+  background-color: transparent;
+  font-family: 'Courier New', monospace;
+}
+
+.comment-actions button:hover {
+  background-color: #343434;
+  color: #FCFAF1;
+  border-color: #343434;
+}
+
+.edit-comment-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #CACACA;
+  border-radius: 0;
+  min-height: 120px;
+  margin-bottom: 1rem;
+  font-family: 'Courier New', monospace;
+  background-color: rgba(252, 250, 241, 0.9);
+}
+
+.edit-comment-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.edit-comment-actions button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.edit-comment-actions button:first-child {
+  background-color: transparent;
+  color: #343434;
+  border: 1px solid #343434;
+}
+
+.edit-comment-actions button:first-child:hover {
+  background-color: #343434;
+  color: #FCFAF1;
+}
+
+.edit-comment-actions button:last-child {
+  background-color: transparent;
+  color: #7a7a7a;
+  border: 1px solid #7a7a7a;
+}
+
+.edit-comment-actions button:last-child:hover {
+  background-color: #7a7a7a;
+  color: #FCFAF1;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.item-header, .comments-section, .comment-item {
+  background-image: url('./assets/paper.png');
+}
+
+.item-list-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.item-list-container h1 {
+  font-family: 'Times New Roman', serif;
+  font-weight: normal;
+  font-size: 2.5rem;
+  color: #343434;
+  border-bottom: 1px dashed #CACACA;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+.item-card {
+  background-color: #FCFAF1;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #CACACA;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.05);
+  position: relative;
+  transition: all 0.3s ease;
+  background-image: url('./assets/paper.png');
+}
+
+.item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  border-color: #E6B31E;
+}
+
+.item-card:before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid #E6B31E;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.item-card:hover:before {
+  opacity: 1;
+}
+
+.item-card header {
+  margin-bottom: 1rem;
+}
+
+.item-card h2 {
+  font-family: 'Times New Roman', serif;
+  font-weight: normal;
+  font-size: 1.5rem;
+  color: #343434;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.5px;
+}
+
+.item-card p {
+  margin: 0.25rem 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.item-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: #7a7a7a;
+}
+
+.item-price {
+  font-family: 'Times New Roman', serif;
+  font-size: 1.25rem;
+  color: #E6B31E;
+  margin: 0.5rem 0;
+}
+
+.item-category {
+  display: inline-block;
+  background-color: #343434;
+  color: #FCFAF1;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.item-description {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 1px dashed #CACACA;
+  border-bottom: 1px dashed #CACACA;
+}
+
+.item-status {
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  color: #7a7a7a;
 }
