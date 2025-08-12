@@ -3,7 +3,7 @@ const ItemList = (props) =>{
   return (
   <>
   <h1>Items List</h1>
-  {props.items.map((ItemList)=>(
+  {props.items.map((item)=>(
   <Link key={item._id} to={`/item/${item._id}`} >
     <h2>{item.title}</h2>
     <p>
