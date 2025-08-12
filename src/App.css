@@ -415,3 +415,159 @@ h1, h2, h3 {
   font-size: 0.8rem;
   color: #7a7a7a;
 }
+
+.vintage-form {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #FCFAF1;
+  border: 1px solid #CACACA;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.05);
+  position: relative;
+  background-image: url('./assets/paper.png');
+  font-family: 'Times New Roman', serif;
+}
+
+.vintage-form:before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid #E6B31E;
+  z-index: -1;
+}
+
+.vintage-form h2 {
+  color: #343434;
+  font-weight: normal;
+  font-size: 1.8rem;
+  margin-top: 0;
+  border-bottom: 1px dashed #CACACA;
+  padding-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #343434;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.vintage-input,
+.vintage-textarea,
+.vintage-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #CACACA;
+  background-color: rgba(252, 250, 241, 0.7);
+  font-family: 'Courier New', monospace;
+  color: #343434;
+  transition: all 0.3s ease;
+}
+
+.vintage-input:focus,
+.vintage-textarea:focus,
+.vintage-select:focus {
+  outline: none;
+  border-color: #E6B31E;
+  box-shadow: 0 0 0 1px #E6B31E;
+}
+
+.vintage-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.vintage-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23343434'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+.file-upload {
+  margin: 1.5rem 0;
+}
+
+.file-upload-label {
+  display: block;
+  padding: 0.75rem;
+  border: 1px dashed #CACACA;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #7a7a7a;
+}
+
+.file-upload-label:hover {
+  border-color: #E6B31E;
+  color: #343434;
+}
+
+.image-preview {
+  margin-top: 1rem;
+  border: 1px solid #CACACA;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #CACACA;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.vintage-button {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #343434;
+  background-color: transparent;
+  color: #343434;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vintage-button:hover {
+  background-color: #343434;
+  color: #FCFAF1;
+}
+
+.vintage-button[type="submit"] {
+  background-color: #E6B31E;
+  border-color: #E6B31E;
+  color: #343434;
+}
+
+.vintage-button[type="submit"]:hover {
+  background-color: #d4a21a;
+  border-color: #d4a21a;
+}
+
+.vintage-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.upload-status {
+  font-style: italic;
+  color: #7a7a7a;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}

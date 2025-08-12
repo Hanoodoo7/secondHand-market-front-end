@@ -1,7 +1,6 @@
     import { useState } from "react";
 
     const itemForm = () => {
-    // State to store all the form input values
     const [formData, setFormData] = useState({
         title: "",            
         description: "",      
@@ -57,25 +56,31 @@
 
 
 return (
-    <form onSubmit={handleSubmit}>
+    <form className="vintage-form" onSubmit={handleSubmit}>
+        <h2>{isEditMode ? "Edit Item" : "Create New Item"}</h2>
+      
+  <div className="form-group">
       <input
-        name="title"
+        name="title" className="vintage-input"
         placeholder="Enter item title"
         value={formData.title}
         onChange={handleChange}
         required
       />
+      </div>
 
-    <textarea
-        name="description"
+  <div className="form-group">
+      <textarea
+        name="description" className="vintage-textarea"
         placeholder="Describe the item"
         value={formData.description}
         onChange={handleChange}
         required
       />
+      </div>
 
-
-    <select name="category" value={formData.category} onChange={handleChange}>
+    <div className="form-group">
+    <select name="category" className="vintage-select" value={formData.category} onChange={handleChange}>
         <option value="Electronics">Electronics</option>
         <option value="Furniture & Home">Furniture & Home</option>
         <option value="Wearables">wearables</option>
@@ -87,64 +92,84 @@ return (
         <option value="Vehicles">Vehicles</option>
         <option value="Other">Other</option>
       </select>
+      </div>
 
+<div className="form-group">
     <input
-        type="number"
+        type="number"  className="vintage-input"
         name="price"
         placeholder="Enter price"
         value={formData.price}
         onChange={handleChange}
         required
       />
+      </div>
 
-    <select name="condition" value={formData.condition} onChange={handleChange}>
+    <div className="form-group">
+    <select name="condition" className="vintage-select"
+    value={formData.condition} onChange={handleChange}>
         <option value="Used">Used </option>
         <option value="Used-Once">Used Once</option>
         <option value="Never-Used">Never Used</option>
       </select>
+      </div>
 
-
-    <input type="file" accept="images/*" onChange={handleImageUpload} />
-      {uploading && <p>Uploading images...</p>}
-      {formData.images && (
-        <img
-          src={formData.images}
-          alt="Uploaded Preview"
-          width="100"
+  
+    <div className="file-upload">
+      <label className="file-upload-label">
+        {formData.images ? "Change Image" : "Upload Image"}
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={handleImageUpload} 
+          style={{ display: 'none' }}
         />
+      </label>
+      {uploading && <p className="upload-status">Uploading images...</p>}
+      {formData.images && (
+        <div className="image-preview">
+          <img
+            src={formData.images}
+            alt="Uploaded Preview"
+          />
+        </div>
       )}
+    </div>
     
-    <select name="status" value={formData.status} onChange={handleChange}>
+    <div className="form-group">
+    <select  className="vintage-select" name="status" value={formData.status} onChange={handleChange}>
         <option value="Available">Available</option>
         <option value="Pending">Pending</option>
         <option value="Sold">Sold</option>
       </select>
+      </div>
     
-
-    <button type="submit" disabled={uploading}>
-        Submit
+<div className="form-actions">
+      <button 
+        className="vintage-button" 
+        type="button" 
+        onClick={() => {
+          setIsEditMode(true);
+          setFormData({
+            title: existingItem.title,
+            description: existingItem.description,
+            price: existingItem.price
+          });
+        }}
+      >
+        Edit Item
       </button>
-
-
-      <button type="editForm" disabled={uploading} >
-        Edit Form
+      
+      <button 
+        className="vintage-button" 
+        type="submit" 
+        disabled={uploading}
+      >
+        {isEditMode ? "Update" : "Submit"}
       </button>
+    </div>
+  </form>
+);
+}
 
-      <button type="button" onClick={() => {
-        setIsEditMode(true)
-        setFormData({
-          title: existingItem.title,
-          description: existingItem.description,
-          price: existingItem.price
-        })
-}}>
-  Edit Item
-</button>
-
-
-      </form>
-      );
-};
-    
   export default itemForm;
-
