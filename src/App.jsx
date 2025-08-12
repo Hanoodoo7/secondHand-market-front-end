@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
@@ -9,7 +9,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import * as authService from "./services/authService.js";
 import * as itemService from "./services/itemService.js";
 import { useState, useEffect } from "react";
-
+import CommentForm from "./components/CommentForm/CommentForm.jsx";
 
 const App = () => {
 
