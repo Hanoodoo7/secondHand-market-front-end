@@ -3,23 +3,23 @@ const ItemList = (props) =>{
   return (
   <div className="item-list-container">
   <h1>Items List</h1>
-  {props.Item.map((Item)=>(
-  <Link key={Item._id} to={`/item/${Item._id}`} >
+  {props.item.map((Item)=>(
+  <Link key={item._id} to={`/item/${item._id}`} >
     <article className="item-card">
       <header>
-    <h2>{Item.title}</h2>
+    <h2>{item.title}</h2>
     <div className="item-meta"></div>
      <div className="item-meta">
-        <p>By {Item.seller.username}</p>
-        <p>Posted: {new Date(Item.createdAt).toLocaleDateString()}</p>
+        <p>By {item.seller.username}</p>
+        <p>Posted: {new Date(item.createdAt).toLocaleDateString()}</p>
       </div>
-     <p className="item-price">{Item.price} BDH</p>
+     <p className="item-price">{item.price} BDH</p>
             </header>
-            <span className="item-category">{Item.category}</span>
-            <p className="item-description">{Item.description}</p>
+            <span className="item-category">{item.category}</span>
+            <p className="item-description">{item.description}</p>
             <div className="item-meta">
-              <p>Condition: {Item.condition}</p>
-              <p className="item-status">Status: {Item.status}</p>
+              <p>Condition: {item.condition}</p>
+              <p className="item-status">Status: {item.status}</p>
             </div>
     </article>
   </Link>
