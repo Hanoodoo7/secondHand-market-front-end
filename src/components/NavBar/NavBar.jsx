@@ -17,7 +17,7 @@ const NavBar = (props) => {
               Welcome, <span className="username">{user.username}</span>
             </li>
             <li className="nav-item">
-              <Link to="/items/new" className="nav-link">Post Item</Link>
+              <Link to="/item/new" className="nav-link">Post Item</Link>
             </li>
             <li className="nav-item">
               <button 
