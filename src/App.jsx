@@ -61,7 +61,7 @@ const App = () => {
 
 const handleUpdateItem = async (itemId, itemFormData) => {
   const updatedItem = await itemService.update(itemId, itemFormData);
-  setItems(item.map((item) => (itemId === item._id ? updatedItem : item)));
+  setItem(item.map((item) => (itemId === item._id ? updatedItem : item)));
   navigate(`/items/${itemId}`);
 };
 
@@ -73,8 +73,8 @@ const handleUpdateItem = async (itemId, itemFormData) => {
       <Routes>
           {user ? (
             <>
-              <Route path='items/new' element={<itemForm handleAddItem={handleAddItem} />} />
-              <Route path='items/:itemId/edit' element={<itemForm handleUpdateItem={handleUpdateItem}/>}/>
+              <Route path='items/new' element={<ItemForm handleAddItem={handleAddItem} />} />
+              <Route path='items/:itemId/edit' element={<ItemForm handleUpdateItem={handleUpdateItem}/>}/>
             </>
           ) : (
             
