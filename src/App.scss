@@ -1,0 +1,356 @@
+$earth-brown: #6B4F3D;
+$rust-orange: #C85C2A;
+$warm-beige: #E3D5C0;
+$soft-clay: #B88B64;
+$deep-moss: #4A5D40;
+$light-ivory: #F5F0E6;
+
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Old Standard TT', serif;
+  background-color: $warm-beige;
+  color: $earth-brown;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Libre Baskerville', serif;
+  color: $earth-brown;
+}
+
+a {
+  color: $rust-orange;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $rust-orange;
+    text-decoration: underline;
+  }
+}
+
+.vintage-bg {
+  background-image: url('./assets/paper.png');
+  background-blend-mode: multiply;
+  background-color: $warm-beige;
+}
+
+.navbar {
+  background-color: $earth-brown;
+  padding: 1rem 2rem;
+  border-bottom: 3px solid $rust-orange;
+  position: relative;
+  z-index: 100;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent 10px,
+      $soft-clay 10px,
+      $soft-clay 20px
+    );
+  }
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: $light-ivory;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  letter-spacing: 0.5px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: $rust-orange;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+.nav-button {
+  background: transparent;
+  border: 1px solid $rust-orange;
+  color: $rust-orange;
+  padding: 0.5rem 1.25rem;
+  border-radius: 3px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $rust-orange;
+    color: $light-ivory;
+  }
+}
+
+.welcome-message {
+  color: $light-ivory;
+  margin-right: auto;
+  font-style: italic;
+
+  .username {
+    color: $rust-orange;
+    font-weight: 700;
+  }
+}
+
+.auth-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: $light-ivory;
+  border: 1px solid $warm-beige;
+  border-radius: 5px;
+  box-shadow: 
+    0 4px 8px rgba(0,0,0,0.1),
+    inset 0 0 0 1px rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, $rust-orange, $deep-moss);
+  }
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed $soft-clay;
+
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    color: $earth-brown;
+    font-style: italic;
+    margin: 0;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $earth-brown;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid $soft-clay;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.8);
+    font-family: 'Old Standard TT', serif;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $rust-orange;
+      box-shadow: 0 0 0 2px rgba($rust-orange, 0.2);
+    }
+
+    &::placeholder {
+      color:$earth-brown;
+      font-style: italic;
+    }
+  }
+}
+
+.submit-button {
+  background: $rust-orange;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 700;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+
+  &:hover {
+    background: $rust-orange;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    background: $rust-orange;
+    cursor: not-allowed;
+  }
+}
+
+.password-feedback {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+
+  &.valid {
+    color: $deep-moss;
+  }
+
+  &.invalid {
+    color: $rust-orange;
+  }
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.item-card {
+  background: $light-ivory;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.1),
+    0 0 0 1px rgba($earth-brown, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 5px 15px rgba(0,0,0,0.1),
+      0 0 0 1px rgba($rust-orange, 0.2);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, $rust-orange, $deep-moss);
+  }
+}
+
+.item-image {
+  height: 200px;
+  background: $warm-beige;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba($earth-brown, 0.5);
+  border-bottom: 1px dashed $soft-clay;
+}
+
+.item-content {
+  padding: 1.5rem;
+}
+
+.item-title {
+  font-family: 'Libre Baskerville', serif;
+  margin: 0 0 0.5rem;
+  color: $earth-brown;
+}
+
+.item-price {
+  font-weight: 700;
+  color: $rust-orange;
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.item-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: $earth-brown;
+  margin: 0.5rem 0;
+}
+
+.item-category {
+  display: inline-block;
+  background: $deep-moss;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.item-description {
+  color: $earth-brown;
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.item-status {
+  font-style: italic;
+  color: $rust-orange;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper, 
+  .full-width-section .section-content {
+    padding: 0 1.5rem;
+  }
+  
+  .item-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .navbar .nav-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

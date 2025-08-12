@@ -40,7 +40,7 @@ const ItemDetails = ({ user }) => {
   const handleDeleteItem = async () => {
     try {
       await itemService.deleteItem(itemId);
-      navigate("/");
+      navigate("/items");
     } catch (err) {
       console.error("Error deleting item:", err);
     }
@@ -70,27 +70,27 @@ const ItemDetails = ({ user }) => {
     setEditCommentText("");
   };
 
-  const handleUpdateComment = async (commentId) => {
-    try {
-      const updatedComment = await itemService.updateComment(
-        itemId,
-        commentId,
-        { text: editCommentText }
-      );
+const handleUpdateComment = async (commentId) => {
+  try {
+    const updatedComment = await itemService.updateComment(
+      itemId,
+      commentId,
+      { text: editCommentText }
+    );
 
-      setItem((prevItem) => ({
-        ...prevItem,
-        comments: prevItem.comments.map((comment) =>
-          comment._id === commentId ? updatedComment : comment
-        ),
-      }));
+    setItem(prevItem => ({
+      ...prevItem,
+      comments: prevItem.comments.map(comment => 
+        comment._id === commentId ? { ...comment, text: editCommentText } : comment
+      )
+    }));
 
-      setEditingCommentId(null);
-      setEditCommentText("");
-    } catch (err) {
-      console.error("Error updating comment:", err);
-    }
-  };
+    setEditingCommentId(null);
+    setEditCommentText("");
+  } catch (err) {
+    console.error("Error updating comment:", err);
+  }
+};
 
   if (loading) return <main>Loading...</main>;
   if (!item) return <main>Item not found</main>;
@@ -147,7 +147,7 @@ const ItemDetails = ({ user }) => {
                   <div>
                     <p>{comment.text}</p>
                     <span>- {comment.author?.username}</span>
-                    {user && comment.author?._id === user._id && (
+                    {user?._id && comment.author?._id?.toString() === user._id.toString() && (
                       <div>
                         <button onClick={() => handleStartEdit(comment)}>
                           Edit

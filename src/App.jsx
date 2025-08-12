@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
@@ -50,9 +50,11 @@ const App = () => {
     setUser(res)
   }
 
-  const handleAddItem = async (formData) => {
-    await itemService.create(formData)
-  }
+const handleAddItem = async (formData) => {
+  const newItem = await itemService.create(formData);
+  setItem([newItem, ...item]); 
+  navigate('/items');
+};
 
   const handleDeleteItem = async (itemId) => {
     await itemService.deleteItem(itemId)
