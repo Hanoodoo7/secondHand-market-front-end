@@ -67,8 +67,9 @@ const handleUpdateItem = async (itemId, itemFormData) => {
 
   return (
    // Private Routes
-    <>
+    <div className="app-container"> 
       <NavBar user={user} handleSignOut={handleSignOut} />
+    <main className="main-content">
       <Routes>
           {user ? (
             <>
@@ -83,14 +84,22 @@ const handleUpdateItem = async (itemId, itemFormData) => {
               <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
             </>
           )}
-          <Route path='/' element={<h1>Hello world!</h1>} />
-          <Route path='/items' element={<ItemList items={items} />} />
-          <Route path='/items/:itemId' element={<ItemDetails user={user} handleDeleteItem={handleDeleteItem} />} />
-          <Route path='*' element={<h1>404</h1>} />
+          <Route path='/' element={
+          <div className="homepage">
+            <h1>Welcome to insert name here idk yet</h1>
+            <p>words words words gotta decide what to add here</p>
+          </div>
+        } />
+        <Route path='*' element={
+          <div className="not-found">
+            <h1>404</h1>
+            <p>Page not found</p>
+          </div>
+        } />
       </Routes>
-    </>
-
-  )
+    </main>
+  </div>
+)
 }
 
 export default App
