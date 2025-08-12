@@ -1,13 +1,14 @@
-import { useParams, Link, useNavigate } from 'react-router';
-import { useEffect, useState } from 'react'
-import * as itemService from '../../services/itemService'
-import CommentForm from '../CommentForm/CommentForm'
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import * as itemService from '../../services/itemService';
 
 const ItemDetails = (props) => {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editCommentText, setEditCommentText] = useState('');
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -20,13 +21,12 @@ const ItemDetails = (props) => {
         setLoading(false);
       }
     };
-    
     fetchItem();
   }, [itemId]);
 
-  const handleAddComment = async (formData) => {
+  const handleAddComment = async (text) => {
     try {
-      const newComment = await itemService.createComment(formData, itemId);
+      const newComment = await itemService.createComment({ text }, itemId);
       setItem(prevItem => ({
         ...prevItem,
         comments: [...prevItem.comments, newComment]
@@ -36,12 +36,56 @@ const ItemDetails = (props) => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDeleteItem = async () => {
     try {
-      await handleDeleteItem(itemId);
+      await itemService.deleteItem(itemId);
       navigate('/');
     } catch (err) {
       console.error('Error deleting item:', err);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await itemService.deleteComment(itemId, commentId);
+      setItem(prevItem => ({
+        ...prevItem,
+        comments: prevItem.comments.filter(comment => comment._id !== commentId)
+      }));
+    } catch (err) {
+      console.error('Error deleting comment:', err);
+    }
+  };
+
+  const handleStartEdit = (comment) => {
+    setEditingCommentId(comment._id);
+    setEditCommentText(comment.text);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCommentId(null);
+    setEditCommentText('');
+  };
+
+  const handleUpdateComment = async (commentId) => {
+    try {
+      const updatedComment = await itemService.updateComment(
+        itemId, 
+        commentId, 
+        { text: editCommentText }
+      );
+      
+      setItem(prevItem => ({
+        ...prevItem,
+        comments: prevItem.comments.map(comment => 
+          comment._id === commentId ? updatedComment : comment
+        )
+      }));
+      
+      setEditingCommentId(null);
+      setEditCommentText('');
+    } catch (err) {
+      console.error('Error updating comment:', err);
     }
   };
 
@@ -51,49 +95,69 @@ const ItemDetails = (props) => {
   return (
     <main>
       <header>
-        <span>{item.category?.toUpperCase()}</span>
-        <h1>
-          {item.title} - {item.price}BDH
-        </h1>
+        <span>{Item.category?.toUpperCase()}</span>
+        <h1>{Item.title} - {Item.price}BDH</h1>
         
         <div>
-          <span>
-            Posted by {item.seller?.username} on {new Date(item.createdAt).toLocaleDateString()}
-          </span>
-          <span>
-            {item.condition} - {item.status}
-          </span>
+          <span>Posted by {Item.seller?.username}</span>
+          <span>{Item.condition} - {Item.status}</span>
         </div>
         
-        <p>{item.description}</p>
+        <p>{Item.description}</p>
         
-        {item.image && (
-          <div>
-            <img src={item.image} alt={item.title} />
-          </div>
-        )}
+        {Item.images && <img src={Item.images} alt={Item.title} />}
 
-        {item.seller?._id === user?._id && (
+        {Item.seller?._id === user?._id && (
           <div>
             <Link to={`/items/${itemId}/edit`}>Edit</Link>
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDeleteItem}>Delete</button>
           </div>
         )}
       </header>
 
       <section>
         <h2>Comments</h2>
-        <CommentForm handleAddComment={handleAddComment} />
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleAddComment(e.target.comment.value);
+          e.target.reset();
+        }}>
+          <textarea name="comment" required />
+          <button type="submit">Add Comment</button>
+        </form>
         
-        {item.comments?.length === 0 ? (
+        {Item.comments?.length === 0 ? (
           <p>No comments yet</p>
         ) : (
           <ul>
-            {item.comments?.map((comment) => (
+            {Item.comments?.map((comment) => (
               <li key={comment._id}>
-                <p>{comment.text}</p>
-                {comment.author?.username && (
-                  <span>- {comment.author.username}</span>
+                {editingCommentId === comment._id ? (
+                  <div>
+                    <textarea
+                      value={editCommentText}
+                      onChange={(e) => setEditCommentText(e.target.value)}
+                    />
+                    <button onClick={() => handleUpdateComment(comment._id)}>
+                      Save
+                    </button>
+                    <button onClick={handleCancelEdit}>Cancel</button>
+                  </div>
+                ) : (
+                  <div>
+                    <p>{comment.text}</p>
+                    <span>- {comment.author?.username}</span>
+                    {comment.author?._id === user?._id && (
+                      <div>
+                        <button onClick={() => handleStartEdit(comment)}>
+                          Edit
+                        </button>
+                        <button onClick={() => handleDeleteComment(comment._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 )}
               </li>
             ))}
