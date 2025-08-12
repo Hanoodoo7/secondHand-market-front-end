@@ -1,34 +1,63 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import * as itemService from '../../services/itemService'
 
-const CommentForm = (props) => {
-  const initialState = { text: '' }
-	const [formData, setFormData] = useState(initialState)
+const commentForm = ({ handleAddComment, user }) => {
+  const [formData, setFormData] = useState({ text: '' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
-	const handleChange = (evt) => {
-		setFormData({ ...formData, [evt.target.name]: evt.target.value })
-	}
+  const handleChange = (evt) => {
+    if (error) setError('')
+    setFormData({ ...formData, [evt.target.name]: evt.target.value })
+  }
 
-	const handleSubmit = (evt) => {
-		evt.preventDefault()
-		props.handleAddComment(formData)
-		setFormData({ text: '' })
-	}
+  const handleSubmit = async (evt) => {
+    evt.preventDefault()
+    
+    if (!user) {
+      setError('You must be logged in to comment')
+      return
+    }
 
-	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor="text-input">Your comment:</label>
-			<textarea
-				required
-				type="text"
-				name="text"
-				id="text-input"
-				value={formData.text}
-				onChange={handleChange}
-			/>
-			<button type="submit">SUBMIT COMMENT</button>
-		</form>
-	)
+    if (!formData.text.trim()) {
+      setError('Comment cannot be empty')
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      await handleAddComment(formData)
+      setFormData({ text: '' })
+    } catch (err) {
+      console.error('Error submitting comment:', err)
+      setError('Failed to post comment. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="comment-form">
+      <label htmlFor="text-input">Your comment:</label>
+      <textarea
+        required
+        type="text"
+        name="text"
+        id="text-input"
+        value={formData.text}
+        onChange={handleChange}
+        disabled={isSubmitting}
+        placeholder={user ? 'Write your comment...' : 'Log in to comment'}
+      />
+      {error && <p className="error-message">{error}</p>}
+      <button 
+        type="submit" 
+        disabled={isSubmitting || !user || !formData.text.trim()}
+      >
+        {isSubmitting ? 'Posting...' : 'Post'}
+      </button>
+    </form>
+  )
 }
 
-export default CommentForm
+export default commentForm
