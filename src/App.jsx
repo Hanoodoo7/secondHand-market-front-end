@@ -4,12 +4,12 @@ import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import ItemDetails from "./components/ItemDetails/ItemDetails.jsx";
 import itemForm from "./components/itemForm/itemForm.jsx";
-import ItemList from "./components/itemList/itemList.jsx";
+import ItemList from "./components/ItemList/ItemList.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import * as authService from "./services/authService.js";
 import * as itemService from "./services/itemService.js";
 import { useState, useEffect } from "react";
-import ItemList from "./components/itemList/itemList.jsx";
+
 
 const App = () => {
   const initialState = authService.getUser();
@@ -65,6 +65,7 @@ const App = () => {
   
   return (
     <>
+    <h1>hello world</h1>
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
         <Route path="/" element={<h1>Hello world!</h1>} />
