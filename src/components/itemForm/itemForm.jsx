@@ -74,9 +74,16 @@ return (
 
 
     <select name="category" value={formData.category} onChange={handleChange}>
-        <option value="cars">Cars</option>
-        <option value="books">Books</option>
-        <option value="sports equipment">Sports Equipment</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture & Home">Furniture & Home</option>
+        <option value="wearables">wearables</option>
+        <option value="Books">Books</option>
+        <option value="Sports">Sports</option>
+        <option value="Hobbies">Hobbies</option>
+        <option value="Spare Parts">Spare Parts</option>
+        <option value="Toys">Toys</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Other">Other</option>
       </select>
 
     <input
@@ -108,8 +115,7 @@ return (
     
     <select name="status" value={formData.status} onChange={handleChange}>
         <option value="available">Available</option>
-        <option value="pending">Pending</option>
-        <option value="sale">Sale</option>
+        <option value="pending">Pending sale</option>
         <option value="sold">Sold</option>
       </select>
     
