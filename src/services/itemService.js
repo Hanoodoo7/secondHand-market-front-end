@@ -88,6 +88,18 @@ async function update(itemId, itemFormData) {
   }
 }
 
+const deleteComment = async (itemId, commentId) => {
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${BASE_URL}/${itemId}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) throw new Error('Failed to delete comment');
+  return res.json();
+};
+
 export {
   index,
   show,
@@ -95,4 +107,5 @@ export {
   createComment,
   deleteItem,
   update,
+  deleteComment
 }
