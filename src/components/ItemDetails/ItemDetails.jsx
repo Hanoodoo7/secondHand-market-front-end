@@ -118,7 +118,8 @@ const ItemDetails = ({ user }) => {
 
       <section className="comments-section">
         <h2>Comments</h2>
-        <CommentForm handleAddComment={handleAddComment} />
+<CommentForm handleAddComment={handleAddComment} user={user} />
+
         
         {item.comments?.length === 0 ? (
           <p>No comments yet</p>
