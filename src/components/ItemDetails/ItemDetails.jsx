@@ -1,6 +1,8 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as itemService from '../../services/itemService';
+import CommentForm from '../CommentForm/CommentForm'
+import { Link } from 'react-router-dom'
 
 const ItemDetails = (props) => {
   const { itemId } = useParams();
@@ -93,8 +95,8 @@ const ItemDetails = (props) => {
   if (!item) return <main>Item not found</main>;
 
   return (
-    <main>
-      <header>
+    <main className="item-details-container">
+      <header className="item-header">
         <span>{Item.category?.toUpperCase()}</span>
         <h1>{Item.title} - {Item.price}BDH</h1>
         
@@ -115,7 +117,7 @@ const ItemDetails = (props) => {
         )}
       </header>
 
-      <section>
+      <section className="comments-section">
         <h2>Comments</h2>
         <form onSubmit={(e) => {
           e.preventDefault();

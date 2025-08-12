@@ -62,6 +62,7 @@ useEffect(() => {
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
 <Route path="/item" element={<ItemList items={items} />} />
+<Route path="/item/:itemId" element={<ItemDetails />} />
           <Route path='*' element={<h1>404</h1>} />
     </Routes>
     </>
