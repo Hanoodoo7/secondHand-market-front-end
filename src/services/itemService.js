@@ -87,6 +87,38 @@ async function update(itemId, itemFormData) {
   }
 }
 
+const deleteComment = async (itemId, commentId) => {
+  try {
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${BASE_URL}/${itemId}/comments/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateComment = async (itemId, commentId, commentData) => {
+  try {
+    const token = localStorage.getItem('token');
+    const res = await fetch(`${BASE_URL}/${itemId}/comments/${commentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(commentData)
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
   index,
   show,
@@ -94,4 +126,6 @@ export {
   createComment,
   deleteItem,
   update,
-}
+  deleteComment,
+  updateComment
+};
