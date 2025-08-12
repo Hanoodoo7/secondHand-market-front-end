@@ -11,11 +11,22 @@ import * as itemService from './services/itemService.js'
 import { useState, useEffect  } from 'react'
 import ItemList from './components/itemList/itemList.jsx'
 
+
 const App = () => {
 
   const initialState = authService.getUser()
 
   const [user, setUser] = useState(initialState)
+  const [items,setItems] = useState([])
+
+
+useEffect(() => {
+  const fetchAllItems = async () => {
+    const itemsData = await itemService.index();
+    console.log('itemsData:', itemsData);
+  };
+  if (user) fetchAllItems();
+}, [user]);
 
   const handleSignUp = async (formData) => {
     try {
