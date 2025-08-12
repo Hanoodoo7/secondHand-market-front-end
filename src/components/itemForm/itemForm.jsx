@@ -76,7 +76,7 @@ return (
     <select name="category" value={formData.category} onChange={handleChange}>
         <option value="Electronics">Electronics</option>
         <option value="Furniture & Home">Furniture & Home</option>
-        <option value="wearables">wearables</option>
+        <option value="Wearables">wearables</option>
         <option value="Books">Books</option>
         <option value="Sports">Sports</option>
         <option value="Hobbies">Hobbies</option>
@@ -96,10 +96,9 @@ return (
       />
 
     <select name="condition" value={formData.condition} onChange={handleChange}>
-        <option value="ok">Ok</option>
-        <option value="great">Great</option>
-        <option value="terrible">Terrible</option>
-        <option value="like new">Like New</option>
+        <option value="Used">Used </option>
+        <option value="Used-Once">Used Once</option>
+        <option value="Never-Used">Never Used</option>
       </select>
 
 
@@ -114,9 +113,9 @@ return (
       )}
     
     <select name="status" value={formData.status} onChange={handleChange}>
-        <option value="available">Available</option>
-        <option value="pending">Pending sale</option>
-        <option value="sold">Sold</option>
+        <option value="Available">Available</option>
+        <option value="Pending">Pending</option>
+        <option value="Sold">Sold</option>
       </select>
     
 
