@@ -64,7 +64,7 @@ return (
         required
       />
 
-        <textarea
+    <textarea
         name="description"
         placeholder="Describe the item"
         value={formData.description}
@@ -73,14 +73,44 @@ return (
       />
 
 
-      <select name="category" value={formData.category} onChange={handleChange}>
+    <select name="category" value={formData.category} onChange={handleChange}>
         <option value="cars">Cars</option>
         <option value="books">Books</option>
         <option value="sports equipment">Sports Equipment</option>
       </select>
 
+    <input
+        type="number"
+        name="price"
+        placeholder="Enter price"
+        value={formData.price}
+        onChange={handleChange}
+        required
+      />
+
+    <select name="condition" value={formData.condition} onChange={handleChange}>
+        <option value="ok">Ok</option>
+        <option value="great">Great</option>
+        <option value="terrible">Terrible</option>
+        <option value="like new">Like New</option>
+      </select>
+
+
+    <input type="file" accept="image/*" onChange={handleImageUpload} />
+      {uploading && <p>Uploading image...</p>}
+      {formData.image && (
+        <img
+          src={formData.image}
+          alt="Uploaded Preview"
+          width="100"
+        />
+      )}
+    
+
+    
+
       </form>
 )
-
+    
   export default itemForm;
 
