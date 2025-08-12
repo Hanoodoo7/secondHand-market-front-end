@@ -1,6 +1,6 @@
     import { useState } from "react";
 
-    const itemForm = () => {
+    const ItemForm = () => {
     const [formData, setFormData] = useState({
         PhoneNumber: "",
         title: "",            
@@ -183,4 +183,4 @@ return (
 );
 }
 
-  export default itemForm;
+  export default ItemForm;
