@@ -3,8 +3,8 @@ const ItemList = (props) =>{
   return (
   <div className="item-list-container">
   <h1>Items List</h1>
-  {props.item.map((Item)=>(
-  <Link key={item._id} to={`/item/${item._id}`} >
+  {props.item.map((item)=>(
+  <Link key={item._id} to={`/items/${item._id}`} >
     <article className="item-card">
       <header>
     <h2>{item.title}</h2>

@@ -18,7 +18,7 @@ const App = () => {
   const initialState = authService.getUser()
 
   const [user, setUser] = useState(initialState)
-  const [items, setItems] = useState([])
+  const [item, setItem] = useState([])
 
   useEffect(() => {
     const fetchAllItems = async () => {
@@ -90,7 +90,7 @@ const handleUpdateItem = async (itemId, itemFormData) => {
             <p>words words words gotta decide what to add here</p>
           </div>
         } />
-        <Route path='/items' element={<ItemList items={items} />} />
+        <Route path='/items' element={<ItemList item={item} />} />
           <Route path='/items/:itemId' element={<ItemDetails user={user} handleDeleteItem={handleDeleteItem} />} />
         <Route path='*' element={
           <div className="not-found">
