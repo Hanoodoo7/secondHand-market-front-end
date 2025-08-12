@@ -1,6 +1,7 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/item`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/items`
 
 const index = async () => {
+  console.log('get items')
   try {
     const res = await fetch(BASE_URL)
     const data = await res.json()

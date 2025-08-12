@@ -23,6 +23,7 @@ const App = () => {
   useEffect(() => {
     const fetchAllItems = async () => {
       const itemsData = await itemService.index()
+      console.log('items useEffect', itemsData)
       setItem(itemsData)
     }
     fetchAllItems()
