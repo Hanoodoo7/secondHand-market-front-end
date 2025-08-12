@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as itemService from '../../services/itemService';
-import CommentForm from '../commentForm/commentForm'
+import CommentForm from '../CommentForm/CommentForm'
 
 const ItemDetails = ({ user }) => {
   const { itemId } = useParams();

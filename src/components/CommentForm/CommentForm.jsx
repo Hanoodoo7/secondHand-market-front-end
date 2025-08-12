@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import * as itemService from '../../services/itemService'
 
-const commentForm = ({ handleAddComment, user }) => {
+const CommentForm = ({ handleAddComment, user }) => {
   const [formData, setFormData] = useState({ text: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -60,4 +60,4 @@ const commentForm = ({ handleAddComment, user }) => {
   )
 }
 
-export default commentForm
+export default CommentForm
