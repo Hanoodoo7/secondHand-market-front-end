@@ -9,7 +9,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import * as authService from "./services/authService.js";
 import * as itemService from "./services/itemService.js";
 import { useState, useEffect } from "react";
-
+import CommentForm from "./components/CommentForm/CommentForm.jsx";
 
 const App = () => {
 
@@ -23,6 +23,7 @@ const App = () => {
   useEffect(() => {
     const fetchAllItems = async () => {
       const itemsData = await itemService.index()
+      console.log('items useEffect', itemsData)
       setItem(itemsData)
     }
     fetchAllItems()
@@ -61,7 +62,7 @@ const App = () => {
 
 const handleUpdateItem = async (itemId, itemFormData) => {
   const updatedItem = await itemService.update(itemId, itemFormData);
-  setItems(item.map((item) => (itemId === item._id ? updatedItem : item)));
+  setItem(item.map((item) => (itemId === item._id ? updatedItem : item)));
   navigate(`/items/${itemId}`);
 };
 
@@ -73,8 +74,8 @@ const handleUpdateItem = async (itemId, itemFormData) => {
       <Routes>
           {user ? (
             <>
-              <Route path='items/new' element={<itemForm handleAddItem={handleAddItem} />} />
-              <Route path='items/:itemId/edit' element={<itemForm handleUpdateItem={handleUpdateItem}/>}/>
+              <Route path='items/new' element={<ItemForm handleAddItem={handleAddItem} />} />
+              <Route path='items/:itemId/edit' element={<ItemForm handleUpdateItem={handleUpdateItem}/>}/>
             </>
           ) : (
             

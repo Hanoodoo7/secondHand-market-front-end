@@ -1,7 +1,7 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import * as itemService from '../../services/itemService';
-import CommentForm from '../CommentForm/CommentForm'
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import * as itemService from "../../services/itemService";
+import CommentForm from "../CommentForm/CommentForm";
 
 const ItemDetails = ({ user }) => {
   const { itemId } = useParams();
@@ -9,7 +9,7 @@ const ItemDetails = ({ user }) => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editCommentText, setEditCommentText] = useState('');
+  const [editCommentText, setEditCommentText] = useState("");
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -17,7 +17,7 @@ const ItemDetails = ({ user }) => {
         const itemData = await itemService.show(itemId);
         setItem(itemData);
       } catch (err) {
-        console.error('Error fetching item:', err);
+        console.error("Error fetching item:", err);
       } finally {
         setLoading(false);
       }
@@ -28,33 +28,35 @@ const ItemDetails = ({ user }) => {
   const handleAddComment = async (commentData) => {
     try {
       const newComment = await itemService.createComment(commentData, itemId);
-      setItem(prevItem => ({
+      setItem((prevItem) => ({
         ...prevItem,
-        comments: [...prevItem.comments, newComment]
+        comments: [...prevItem.comments, newComment],
       }));
     } catch (err) {
-      console.error('Error adding comment:', err);
+      console.error("Error adding comment:", err);
     }
   };
 
   const handleDeleteItem = async () => {
     try {
       await itemService.deleteItem(itemId);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      console.error('Error deleting item:', err);
+      console.error("Error deleting item:", err);
     }
   };
 
   const handleDeleteComment = async (commentId) => {
     try {
       await itemService.deleteComment(itemId, commentId);
-      setItem(prevItem => ({
+      setItem((prevItem) => ({
         ...prevItem,
-        comments: prevItem.comments.filter(comment => comment._id !== commentId)
+        comments: prevItem.comments.filter(
+          (comment) => comment._id !== commentId
+        ),
       }));
     } catch (err) {
-      console.error('Error deleting comment:', err);
+      console.error("Error deleting comment:", err);
     }
   };
 
@@ -65,28 +67,28 @@ const ItemDetails = ({ user }) => {
 
   const handleCancelEdit = () => {
     setEditingCommentId(null);
-    setEditCommentText('');
+    setEditCommentText("");
   };
 
   const handleUpdateComment = async (commentId) => {
     try {
       const updatedComment = await itemService.updateComment(
-        itemId, 
-        commentId, 
+        itemId,
+        commentId,
         { text: editCommentText }
       );
-      
-      setItem(prevItem => ({
+
+      setItem((prevItem) => ({
         ...prevItem,
-        comments: prevItem.comments.map(comment => 
+        comments: prevItem.comments.map((comment) =>
           comment._id === commentId ? updatedComment : comment
-        )
+        ),
       }));
-      
+
       setEditingCommentId(null);
-      setEditCommentText('');
+      setEditCommentText("");
     } catch (err) {
-      console.error('Error updating comment:', err);
+      console.error("Error updating comment:", err);
     }
   };
 
@@ -97,15 +99,19 @@ const ItemDetails = ({ user }) => {
     <main className="item-details-container">
       <header className="item-header">
         <span>{item.category?.toUpperCase()}</span>
-        <h1>{item.title} - {item.price}BDH</h1>
-        
+        <h1>
+          {item.title} - {item.price}BDH
+        </h1>
+
         <div>
           <span>Posted by {item.seller?.username}</span>
-          <span>{item.condition} - {item.status}</span>
+          <span>
+            {item.condition} - {item.status}
+          </span>
         </div>
-        
+
         <p>{item.description}</p>
-        
+
         {item.images && <img src={item.images} alt={item.title} />}
 
         {item.seller?._id === user?._id && (
@@ -118,8 +124,8 @@ const ItemDetails = ({ user }) => {
 
       <section className="comments-section">
         <h2>Comments</h2>
-        <CommentForm handleAddComment={handleAddComment} />
-        
+        <CommentForm handleAddComment={handleAddComment} user={user} />
+
         {item.comments?.length === 0 ? (
           <p>No comments yet</p>
         ) : (
@@ -141,12 +147,14 @@ const ItemDetails = ({ user }) => {
                   <div>
                     <p>{comment.text}</p>
                     <span>- {comment.author?.username}</span>
-                    {comment.author?._id === user?._id && (
+                    {user && comment.author?._id === user._id && (
                       <div>
                         <button onClick={() => handleStartEdit(comment)}>
                           Edit
                         </button>
-                        <button onClick={() => handleDeleteComment(comment._id)}>
+                        <button
+                          onClick={() => handleDeleteComment(comment._id)}
+                        >
                           Delete
                         </button>
                       </div>

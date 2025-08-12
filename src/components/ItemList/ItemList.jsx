@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const ItemList = (props) =>{
 
   return (
@@ -8,9 +10,9 @@ const ItemList = (props) =>{
     <article className="item-card">
       <header>
     <h2>{item.title}</h2>
-    <div className="item-meta"></div>
+    {/* <div className="item-meta"></div> */}
      <div className="item-meta">
-        <p>By {item.seller.username}</p>
+        <p>By {item.seller?.username}</p>
         <p>Posted: {new Date(item.createdAt).toLocaleDateString()}</p>
       </div>
      <p className="item-price">{item.price} BDH</p>

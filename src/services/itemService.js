@@ -1,6 +1,7 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/item`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/items`
 
 const index = async () => {
+  console.log('get items')
   try {
     const res = await fetch(BASE_URL)
     const data = await res.json()
@@ -87,6 +88,34 @@ async function update(itemId, itemFormData) {
   }
 }
 
+const deleteComment = async (itemId, commentId) => {
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${BASE_URL}/${itemId}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) throw new Error('Failed to delete comment');
+  return res.json();
+};
+
+const updateComment = async (itemId, commentId, commentFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${itemId}/comments/${commentId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(commentFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   index,
   show,
@@ -94,4 +123,6 @@ export {
   createComment,
   deleteItem,
   update,
+  deleteComment,
+  updateComment
 }
