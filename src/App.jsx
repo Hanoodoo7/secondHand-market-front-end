@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import ItemDetails from "./components/ItemDetails/ItemDetails.jsx";
-import itemForm from "./components/itemForm/itemForm.jsx";
+import ItemForm from "./components/ItemForm/ItemForm.jsx";
 import ItemList from "./components/ItemList/ItemList.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import * as authService from "./services/authService.js";
@@ -23,7 +23,7 @@ const App = () => {
   useEffect(() => {
     const fetchAllItems = async () => {
       const itemsData = await itemService.index()
-      setItems(itemsData)
+      setItem(itemsData)
     }
     fetchAllItems()
   }, [])
@@ -55,13 +55,13 @@ const App = () => {
 
   const handleDeleteItem = async (itemId) => {
     await itemService.deleteItem(itemId)
-    setItems(items.filter(item => item._id !== itemId))
+    setItem(item.filter(item => item._id !== itemId))
     navigate('/items')
   }
 
 const handleUpdateItem = async (itemId, itemFormData) => {
   const updatedItem = await itemService.update(itemId, itemFormData);
-  setItems(items.map((item) => (itemId === item._id ? updatedItem : item)));
+  setItems(item.map((item) => (itemId === item._id ? updatedItem : item)));
   navigate(`/items/${itemId}`);
 };
 
@@ -73,7 +73,7 @@ const handleUpdateItem = async (itemId, itemFormData) => {
       <Routes>
           {user ? (
             <>
-              <Route path='item/new' element={<itemForm handleAddItem={handleAddItem} />} />
+              <Route path='items/new' element={<itemForm handleAddItem={handleAddItem} />} />
               <Route path='items/:itemId/edit' element={<itemForm handleUpdateItem={handleUpdateItem}/>}/>
             </>
           ) : (
