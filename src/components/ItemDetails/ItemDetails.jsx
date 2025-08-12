@@ -1,9 +1,9 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as itemService from '../../services/itemService';
-import CommentForm from '../commentForm/commentForm'
+import CommentForm from '../CommentForm/CommentForm'
 
-const ItemDetails = (props) => {
+const ItemDetails = ({ user }) => {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
@@ -25,9 +25,9 @@ const ItemDetails = (props) => {
     fetchItem();
   }, [itemId]);
 
-  const handleAddComment = async (text) => {
+  const handleAddComment = async (commentData) => {
     try {
-      const newComment = await itemService.createComment({ text }, itemId);
+      const newComment = await itemService.createComment(commentData, itemId);
       setItem(prevItem => ({
         ...prevItem,
         comments: [...prevItem.comments, newComment]
@@ -96,19 +96,19 @@ const ItemDetails = (props) => {
   return (
     <main className="item-details-container">
       <header className="item-header">
-        <span>{Item.category?.toUpperCase()}</span>
-        <h1>{Item.title} - {Item.price}BDH</h1>
+        <span>{item.category?.toUpperCase()}</span>
+        <h1>{item.title} - {item.price}BDH</h1>
         
         <div>
-          <span>Posted by {Item.seller?.username}</span>
-          <span>{Item.condition} - {Item.status}</span>
+          <span>Posted by {item.seller?.username}</span>
+          <span>{item.condition} - {item.status}</span>
         </div>
         
-        <p>{Item.description}</p>
+        <p>{item.description}</p>
         
-        {Item.images && <img src={Item.images} alt={Item.title} />}
+        {item.images && <img src={item.images} alt={item.title} />}
 
-        {Item.seller?._id === user?._id && (
+        {item.seller?._id === user?._id && (
           <div>
             <Link to={`/items/${itemId}/edit`}>Edit</Link>
             <button onClick={handleDeleteItem}>Delete</button>
@@ -118,20 +118,13 @@ const ItemDetails = (props) => {
 
       <section className="comments-section">
         <h2>Comments</h2>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          handleAddComment(e.target.comment.value);
-          e.target.reset();
-        }}>
-          <textarea name="comment" required />
-          <button type="submit">Add Comment</button>
-        </form>
+        <CommentForm handleAddComment={handleAddComment} />
         
-        {Item.comments?.length === 0 ? (
+        {item.comments?.length === 0 ? (
           <p>No comments yet</p>
         ) : (
           <ul>
-            {Item.comments?.map((comment) => (
+            {item.comments?.map((comment) => (
               <li key={comment._id}>
                 {editingCommentId === comment._id ? (
                   <div>
