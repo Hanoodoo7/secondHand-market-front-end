@@ -28,6 +28,7 @@ useEffect(() => {
   if (user) fetchAllItems();
 }, [user]);
 
+
   const handleSignUp = async (formData) => {
     try {
       const res = await authService.signUp(formData)
@@ -60,7 +61,7 @@ useEffect(() => {
           <Route path='/' element={<h1>Hello world!</h1>} />
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
-          <Route path='/item' element={<ItemList/>} />
+<Route path="/item" element={<ItemList items={items} />} />
           <Route path='*' element={<h1>404</h1>} />
     </Routes>
     </>
