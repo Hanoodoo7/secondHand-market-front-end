@@ -10,18 +10,19 @@ const NavBar = (props) => {
         <li className="nav-item">
           <Link to="/items" className="nav-link">Items</Link>
         </li>
+
         
-        {props.user? (
+        {props.user ? (
           <>
             <li className="nav-item welcome">
-              Welcome, <span className="username">{user.username}</span>
+              Welcome, <span className="username">{props.user.username}</span>
             </li>
             <li className="nav-item">
-              <Link to="/item/new" className="nav-link">Post Item</Link>
+              <Link to="/items/new" className="nav-link">Post Item</Link>
             </li>
             <li className="nav-item">
               <button 
-                onClick={handleSignOut} 
+                onClick={props.handleSignOut} 
                 className="nav-button"
               >
                 Sign Out
