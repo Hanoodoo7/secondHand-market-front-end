@@ -122,6 +122,7 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
           <label htmlFor="price-input">Price</label>
           <input
             type="number"
+            step="0.01"
             id="price-input"
             className="vintage-input"
             name="price"
