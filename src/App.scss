@@ -1020,3 +1020,138 @@ h1, h2, h3, h4 {
     }
   }
 }
+
+.search-filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .search-box {
+    display: flex;
+    gap: 0.5rem;
+
+    input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #8B5E3C;
+      background-color: #fff8f0;
+      font-size: 1rem;
+      transition: all 0.3s;
+
+      &:focus {
+        outline: none;
+        border-color: #6B3F1E;
+        box-shadow: 0 0 0 3px rgba(107, 63, 30, 0.1);
+      }
+
+      &::placeholder {
+        color: #5C3A21;
+      }
+    }
+
+    .search-button {
+      padding: 0 1rem;
+      background-color: #6B3F1E; 
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #8B5E3C;
+      }
+    }
+  }
+
+  .filters-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background-color: #fff8f0;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(49, 11, 11, 0.05);
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-width: 150px;
+
+      label {
+        font-weight: 500;
+        color: #310B0B;
+      }
+
+      select,
+      input[type="number"] {
+        padding: 0.5rem 0.8rem;
+        border-radius: 6px;
+        border: 1px solid #8B5E3C;
+        background-color: #fff;
+        font-size: 0.95rem;
+        transition: border 0.3s, box-shadow 0.3s;
+
+        &:focus {
+          outline: none;
+          border-color: #6B3F1E;
+          box-shadow: 0 0 0 3px rgba(107, 63, 30, 0.1);
+        }
+      }
+
+      .price-range {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+
+        span {
+          font-size: 0.9rem;
+          color: #5C3A21;
+        }
+
+        input {
+          width: 60px;
+        }
+      }
+    }
+
+    .reset-filters {
+      align-self: flex-end;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: none;
+      background-color: #8B5E3C;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #6B3F1E;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .search-filters-container {
+    .filters-section {
+      flex-direction: column;
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .reset-filters {
+        width: 100%;
+      }
+    }
+  }
+}
