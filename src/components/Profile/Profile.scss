@@ -7,7 +7,7 @@
     background: white;
     border-radius: 8px;
     padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
 
     .avatar-section {
@@ -23,7 +23,7 @@
     .avatar-container {
       position: relative;
       width: 150px;
-      
+
       .profile-avatar {
         width: 150px;
         height: 150px;
@@ -57,7 +57,8 @@
             font-weight: 500;
           }
 
-          textarea, input {
+          textarea,
+          input {
             width: 100%;
             padding: 0.5rem;
             border: 1px solid #ddd;
@@ -107,7 +108,7 @@
     background: white;
     border-radius: 8px;
     padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
     h2 {
       margin-top: 0;
@@ -146,7 +147,7 @@
 
         &:hover {
           transform: translateY(-5px);
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .item-image {
@@ -242,10 +243,38 @@
     padding: 2rem;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .error-message {
     color: #d32f2f;
+  }
+}
+
+.edit-profile-btn {
+  display: inline-block;
+  background: #1976d2;
+  color: white;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.15s ease-in-out;
+
+  &:hover {
+    background: #1565c0;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    background: #0d47a1;
+    transform: translateY(0);
+  }
+
+  &:focus {
+    outline: 2px solid rgba(25, 118, 210, 0.4);
+    outline-offset: 2px;
   }
 }
