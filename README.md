@@ -1,12 +1,40 @@
-# React + Vite
+# Secondhand market site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🕹️ Description
+A website where users can buy and sell secondhand items.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 **Access it** [here!](link)
 
-## Expanding the ESLint configuration
+👉 **Planning Materials:**
+ [User Stories + Wireframe](https://trello.com/b/OVNtOirB/second-hand-market)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### How to Use
+- The user can sign in, sign up, or look through posted items as a guest.
+- Post secondhand items you want to sell to others.
+- Create, edit or delete items as you please.
+
+## 💡 Technologies Used
+- React.js
+- Vite / Babel
+- CSS / SCSS
+- JavaScript
+- Node.js
+- Express.js
+- Morgan middleware
+- Cors
+- Mongoose
+- MongoDB
+- Bcrypt
+- Express
+- Cloudinary
+
+## 📚 Credits / References Used
+- [Color Pallet](https://colorhunt.co/palette/eeb76be2703a9c3d54310b0b)
+- [Bckground textures](https://www.transparenttextures.com/)
+- []()
+
+
+## 🚧 Next Steps
+- Adding a music player.

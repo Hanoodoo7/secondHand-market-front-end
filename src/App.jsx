@@ -10,6 +10,9 @@ import * as authService from "./services/authService.js";
 import * as itemService from "./services/itemService.js";
 import { useState, useEffect } from "react";
 import CommentForm from "./components/CommentForm/CommentForm.jsx";
+import Footer from './components/Footer/Footer';
+import Loader from './components/Loading/loader.jsx';
+import HomePage from "./components/Homepage/Homepage.jsx";
 
 const App = () => {
 
@@ -68,6 +71,7 @@ const handleUpdateItem = async (itemId, itemFormData) => {
   navigate(`/items/${itemId}`);
 };
 
+
   return (
    // Private Routes
     <div className="app-container"> 
@@ -87,12 +91,10 @@ const handleUpdateItem = async (itemId, itemFormData) => {
               <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
             </>
           )}
-          <Route path='/' element={
-          <div className="homepage">
-            <h1>Welcome to insert name here idk yet</h1>
-            <p>words words words gotta decide what to add here</p>
-          </div>
-        } />
+         <Route 
+  path="/" 
+  element={<HomePage user={user} items={item} />} 
+/>
         <Route path='/items' element={<ItemList item={item} />} />
           <Route path='/items/:itemId' element={<ItemDetails user={user} handleDeleteItem={handleDeleteItem} />} />
         <Route path='*' element={
@@ -103,6 +105,7 @@ const handleUpdateItem = async (itemId, itemFormData) => {
         } />
       </Routes>
     </main>
+    <Footer user={user} />
   </div>
 )
 }
