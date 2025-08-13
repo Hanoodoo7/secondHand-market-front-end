@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Loader from "../Loading/loader";
 
 const ItemList = (props) => {
   const location = useLocation();
@@ -11,6 +12,13 @@ const ItemList = (props) => {
     condition: "All",
     status: "Available"
   });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading (replace with actual data fetch if needed)
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -74,7 +82,7 @@ const ItemList = (props) => {
     setSearchTerm("");
   };
 
-  return (
+   return (
     <>
       <h1>Items List</h1>
       
@@ -168,12 +176,16 @@ const ItemList = (props) => {
         </div>
       </div>
 
-      {/* Items List */}
-      <div className="item-list-container">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
-            <Link key={item._id} to={`/items/${item._id}`}>
-              <article className="item-card">
+       {isLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
+          <Loader />
+        </div>
+      ) : (
+        <div className="item-list-container">
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => (
+              <Link key={item._id} to={`/items/${item._id}`}>
+                <article className="item-card">
                 <header>
                   <h2>{item.title}</h2>
                   <div className="item-meta">
@@ -188,12 +200,13 @@ const ItemList = (props) => {
                   <p className="item-status">Status: {item.status}</p>
                 </div>
               </article>
-            </Link>
-          ))
-        ) : (
-          <p className="no-items-message">No items match your search criteria.</p>
-        )}
-      </div>
+              </Link>
+            ))
+          ) : (
+            <p className="no-items-message">No items match your search criteria.</p>
+          )}
+        </div>
+      )}
     </>
   );
 };

@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as itemService from "../../services/itemService";
 import CommentForm from "../CommentForm/CommentForm";
+import Loader from "../Loading/loader";
 
 const ItemDetails = ({ user }) => {
   const { itemId } = useParams();
@@ -92,7 +93,11 @@ const handleUpdateComment = async (commentId) => {
   }
 };
 
-  if (loading) return <main>Loading...</main>;
+if (loading) return (
+  <main style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+    <Loader />
+  </main>
+);
   if (!item) return <main>Item not found</main>;
 
   return (

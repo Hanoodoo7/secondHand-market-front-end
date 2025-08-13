@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as itemService from "../../services/itemService"; 
+import Loader from "../Loading/loader";
 
 const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
 
   const [formData, setFormData] = useState(initialState);
   const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -47,29 +50,52 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
     }
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    if (itemId) {
-      handleUpdateItem(itemId, formData);
-    } else {
-      handleAddItem(formData);
+    setLoading(true);
+    try {
+      if (itemId) {
+        await handleUpdateItem(itemId, formData);
+      } else {
+        await handleAddItem(formData);
+      }
+      navigate("/items");
+    } catch (error) {
+      console.error("Form submission failed", error);
+    } finally {
+      setLoading(false);
     }
-    navigate("/items");
   };
 
   useEffect(() => {
     const fetchItem = async () => {
-      const itemData = await itemService.show(itemId);
-      setFormData(itemData);
+      if (!itemId) return;
+      setFetching(true);
+      try {
+        const itemData = await itemService.show(itemId);
+        setFormData(itemData);
+      } catch (error) {
+        console.error("Failed to fetch item", error);
+      } finally {
+        setFetching(false);
+      }
     };
-    if (itemId) fetchItem();
+    fetchItem();
     return () => setFormData(initialState);
   }, [itemId]);
+
+  if (fetching) {
+    return (
+      <main style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+        <Loader />
+      </main>
+    );
+  }
 
   return (
     <main>
       <h1>{itemId ? "Edit Item" : "Create New Item"}</h1>
-      <form className="vintage-form" onSubmit={handleSubmit}>
+       <form className="vintage-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title-input">Title</label>
           <input
@@ -186,13 +212,18 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
           </select>
         </div>
 
-        <div className="form-actions">
+       <div className="form-actions">
           <button
             className="vintage-button"
             type="submit"
-            disabled={uploading}
+            disabled={uploading || loading}
           >
-            {itemId ? "Update" : "Submit"}
+            {loading ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Loader />
+                <span>Processing...</span>
+              </div>
+            ) : itemId ? "Update" : "Submit"}
           </button>
         </div>
       </form>

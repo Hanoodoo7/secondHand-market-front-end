@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import * as itemService from '../../services/itemService'
+import Loader from "../Loading/loader";
 
 const CommentForm = ({ handleAddComment, user }) => {
   const [formData, setFormData] = useState({ text: '' })
@@ -53,8 +54,14 @@ const CommentForm = ({ handleAddComment, user }) => {
       <button 
         type="submit" 
         disabled={isSubmitting || !user || !formData.text.trim()}
+        className="submit-button"
       >
-        {isSubmitting ? 'Posting...' : 'Post'}
+        {isSubmitting ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Loader />
+            <span>Posting...</span>
+          </div>
+        ) : 'Post'}
       </button>
     </form>
   )

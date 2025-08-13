@@ -32,8 +32,7 @@ const SignIn = (props) => {
     <div className="auth-container">
       <div className="vintage-decoration top-right"> ҉ </div>
       <div className="auth-header">
-        <h1>Welcome Back</h1>
-        <p>Sign In...... think of something clever to put here</p>
+        <h1>Welcome Back!</h1>
       </div>
  <form onSubmit={handleSubmit} className="auth-form">
         <div className="form-group">
