@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Homepage.scss';
+import womanShopping from "../assets/womenbeshoppin.png";
 
 const Homepage = ({ user, items }) => {
   const getCategoryIcon = (category) => {
@@ -41,7 +42,11 @@ const Homepage = ({ user, items }) => {
         </div>
         <div className="hero-image">
           <div className="image-placeholder">
-            <span>🛍️</span>
+            <img 
+                src={womanShopping} 
+                alt="Women shopping illustration"
+                className="hero-illustration"
+                />
           </div>
         </div>
       </div>
