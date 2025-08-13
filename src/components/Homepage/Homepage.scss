@@ -77,9 +77,10 @@
 
     .hero-image {
       flex: 1;
+
       .image-placeholder {
         width: 100%;
-        height: 250px;
+        height: 100%;
         background: rgba(238, 183, 107, 0.1);
         border-radius: 8px;
         display: flex;
@@ -87,6 +88,12 @@
         justify-content: center;
         font-size: 4rem;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        .hero-illustration {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        }
       }
     }
   }
@@ -252,43 +259,6 @@
     }
   }
 
-  .testimonials {
-    margin: 3rem 0;
-    text-align: center;
-
-    h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .testimonial-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .testimonial-card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      text-align: left;
-
-      .quote {
-        font-style: italic;
-        color: #310B0B;
-        margin-bottom: 1rem;
-        line-height: 1.6;
-        font-size: 0.95rem;
-      }
-
-      .author {
-        color: #9C3D54;
-        font-weight: 500;
-        font-size: 0.9rem;
-      }
-    }
-  }
 
   @media (max-width: 768px) {
     padding: 1.5rem;
