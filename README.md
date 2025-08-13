@@ -32,9 +32,10 @@ A website where users can buy and sell secondhand items.
 
 ## 📚 Credits / References Used
 - [Color Pallet](https://colorhunt.co/palette/eeb76be2703a9c3d54310b0b)
-- [Bckground textures](https://www.transparenttextures.com/)
-- []()
+- [Background textures](https://www.transparenttextures.com/)
+- [Loading animation](https://css-loaders.com/)
+- [Mainpage image](https://unsplash.com/)
 
 
 ## 🚧 Next Steps
-- Adding a music player.
+- Flesh out profiles.
