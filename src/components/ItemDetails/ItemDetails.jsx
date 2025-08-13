@@ -132,35 +132,30 @@ const handleUpdateComment = async (commentId) => {
           <ul>
             {item.comments?.map((comment) => (
               <li key={comment._id}>
-                {editingCommentId === comment._id ? (
-                  <div>
-                    <textarea
-                      value={editCommentText}
-                      onChange={(e) => setEditCommentText(e.target.value)}
-                    />
-                    <button onClick={() => handleUpdateComment(comment._id)}>
-                      Save
-                    </button>
-                    <button onClick={handleCancelEdit}>Cancel</button>
-                  </div>
-                ) : (
-                  <div>
-                    <p>{comment.text}</p>
-                    <span>- {comment.author?.username}</span>
-                    {user?._id && comment.author?._id?.toString() === user._id.toString() && (
-                      <div>
-                        <button onClick={() => handleStartEdit(comment)}>
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDeleteComment(comment._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
+               {editingCommentId === comment._id ? (
+  <div className="new-comment" >
+    <textarea
+      value={editCommentText}
+      onChange={(e) => setEditCommentText(e.target.value)}
+    />
+    <div className="comment-buttons">
+      <button className="save-btn" onClick={() => handleUpdateComment(comment._id)}>Save</button>
+      <button onClick={handleCancelEdit}>Cancel</button>
+    </div>
+  </div>
+) : (
+  <div>
+    <p>{comment.text}</p>
+    <span>- {comment.author?.username}</span>
+    {user?._id && comment.author?._id?.toString() === user._id.toString() && (
+      <div className="comment-buttons">
+        <button className="edit-btn" onClick={() => handleStartEdit(comment)}>Edit</button>
+        <button className="delete-btn" onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+      </div>
+    )}
+  </div>
+)}
+
               </li>
             ))}
           </ul>
