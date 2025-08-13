@@ -15,6 +15,7 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
     condition: "Used",
     status: "Available",
     images: "",
+    contact: "",
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -210,6 +211,19 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
             <option value="Pending">Pending</option>
             <option value="Sold">Sold</option>
           </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="contact-input">Contact Information</label>
+          <textarea
+            name="contact"
+            id="contact-input"
+            className="vintage-textarea"
+            placeholder="You can put a phone number, an email, etc..."
+            value={formData.contact}
+            onChange={handleChange}
+            required
+          />
         </div>
 
        <div className="form-actions">
