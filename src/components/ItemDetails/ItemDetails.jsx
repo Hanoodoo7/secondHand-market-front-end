@@ -120,6 +120,7 @@ if (loading) return (
           Contact Information: {item.contact}
         </p>
 
+
         {item.images && <img src={item.images} alt={item.title} />}
 
         {item.seller?._id === user?._id && (
