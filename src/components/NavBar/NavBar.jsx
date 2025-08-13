@@ -21,6 +21,9 @@ const NavBar = (props) => {
               <Link to="/items/new" className="nav-link">Post Item</Link>
             </li>
             <li className="nav-item">
+              <Link to="/profile" className="nav-link">Profile</Link>
+            </li>
+            <li className="nav-item">
               <button 
                 onClick={props.handleSignOut} 
                 className="nav-button"
