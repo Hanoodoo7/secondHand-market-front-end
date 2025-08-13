@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import './Homepage.scss';
 import IMAGES from '../../images'
 
-
 const Homepage = ({ user, items }) => {
   const getCategoryIcon = (category) => {
     const icons = {
@@ -76,9 +75,9 @@ const Homepage = ({ user, items }) => {
     <h2>Recently Added</h2>
     <Link to="/items" className="view-all">View All →</Link>
   </div>
-  {items.slice(0, 2).length > 0 ? ( // Changed from 4 to 2
+  {items.slice(0, 2).length > 0 ? ( 
     <div className="item-grid">
-      {items.slice(0, 2).map(item => ( // Changed from 4 to 2
+      {items.slice(0, 2).map(item => ( 
         <Link to={`/items/${item._id}`} key={item._id} className="item-card">
           <div className="item-image">
             {item.images ? (

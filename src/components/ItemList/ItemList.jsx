@@ -15,7 +15,8 @@ const ItemList = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading (replace with actual data fetch if needed)
+
+    
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);

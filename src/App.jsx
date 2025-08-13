@@ -26,7 +26,6 @@ const App = () => {
   useEffect(() => {
     const fetchAllItems = async () => {
       const itemsData = await itemService.index()
-      console.log('items useEffect', itemsData)
       setItem(itemsData)
     }
     fetchAllItems()
@@ -73,7 +72,6 @@ const handleUpdateItem = async (itemId, itemFormData) => {
 
 
   return (
-   // Private Routes
     <div className="app-container"> 
       <NavBar user={user} handleSignOut={handleSignOut} />
     <main className="main-content">
@@ -85,7 +83,6 @@ const handleUpdateItem = async (itemId, itemFormData) => {
             </>
           ) : (
             
-            // Public Routes
             <>
               <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
               <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
