@@ -115,7 +115,11 @@ if (loading) return (
           </span>
         </div>
 
-        <p>{item.description}</p>
+        <p>{item.description}
+          <br />
+          Contact Information: {item.contact}
+        </p>
+
 
         {item.images && <img src={item.images} alt={item.title} />}
 
