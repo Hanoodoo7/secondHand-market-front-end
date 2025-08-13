@@ -78,7 +78,7 @@ const handleUpdateItem = async (itemId, itemFormData) => {
       <Routes>
           {user ? (
             <>
-              <Route path='items/new' element={<ItemForm handleAddItem={handleAddItem} />} />
+              <Route path='items/new' element={<ItemForm handleAddItem={handleAddItem} user={user}/>} />
               <Route path='items/:itemId/edit' element={<ItemForm handleUpdateItem={handleUpdateItem}/>}/>
             </>
           ) : (

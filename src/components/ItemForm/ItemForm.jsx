@@ -22,6 +22,7 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [imageInputMethod, setImageInputMethod] = useState("upload"); // 'upload' or 'url'
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -51,6 +52,10 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
     }
   };
 
+  const handleImageUrlChange = (evt) => {
+    setFormData({ ...formData, images: evt.target.value });
+  };
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     setLoading(true);
@@ -75,6 +80,10 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
       try {
         const itemData = await itemService.show(itemId);
         setFormData(itemData);
+        // Set input method based on existing image (URL or uploaded)
+        if (itemData.images && itemData.images.startsWith("http")) {
+          setImageInputMethod("url");
+        }
       } catch (error) {
         console.error("Failed to fetch item", error);
       } finally {
@@ -94,9 +103,9 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
   }
 
   return (
-    <main>
+    <main className="item-form-container">
       <h1>{itemId ? "Edit Item" : "Create New Item"}</h1>
-       <form className="vintage-form" onSubmit={handleSubmit}>
+      <form className="vintage-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title-input">Title</label>
           <input
@@ -178,24 +187,59 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
 
         <div className="form-group">
           <label htmlFor="image-upload">Image</label>
-          <div className="file-upload">
-            <label className="file-upload-label" htmlFor="image-upload">
-              {formData.images ? "Change Image" : "Upload Image"}
-            </label>
-            <input
-              id="image-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              style={{ display: "none" }}
-            />
-            {uploading && <p className="upload-status">Uploading image...</p>}
-            {formData.images && (
-              <div className="image-preview">
-                <img src={formData.images} alt="Uploaded preview" />
-              </div>
-            )}
+          <div className="image-input-method-toggle">
+            <button
+              type="button"
+              className={`toggle-button ${imageInputMethod === "upload" ? "active" : ""}`}
+              onClick={() => setImageInputMethod("upload")}
+            >
+              Upload
+            </button>
+            <button
+              type="button"
+              className={`toggle-button ${imageInputMethod === "url" ? "active" : ""}`}
+              onClick={() => setImageInputMethod("url")}
+            >
+              URL
+            </button>
           </div>
+
+          {imageInputMethod === "upload" ? (
+            <div className="file-upload">
+              <label className="file-upload-label" htmlFor="image-upload">
+                {formData.images ? "Change Image" : "Choose Image"}
+              </label>
+              <input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                style={{ display: "none" }}
+              />
+              {uploading && <p className="upload-status">Uploading image...</p>}
+            </div>
+          ) : (
+            <input
+              type="url"
+              className="vintage-input"
+              placeholder="Enter image URL"
+              value={formData.images}
+              onChange={handleImageUrlChange}
+            />
+          )}
+
+          {formData.images && (
+            <div className="image-preview">
+              <img src={formData.images} alt="Preview" />
+              <button
+                type="button"
+                className="remove-image-button"
+                onClick={() => setFormData({ ...formData, images: "" })}
+              >
+                Remove Image
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="form-group">
@@ -226,7 +270,7 @@ const ItemForm = ({ handleAddItem, handleUpdateItem }) => {
           />
         </div>
 
-       <div className="form-actions">
+        <div className="form-actions">
           <button
             className="vintage-button"
             type="submit"

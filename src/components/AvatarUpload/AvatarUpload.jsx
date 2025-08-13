@@ -13,7 +13,6 @@ const AvatarUpload = ({ user, onAvatarUpdate }) => {
       setLoading(true);
       setError('');
       
-      // Convert to base64
       const reader = new FileReader();
       reader.readAsDataURL(file);
       
@@ -33,6 +32,8 @@ const AvatarUpload = ({ user, onAvatarUpdate }) => {
     }
   };
 
+
+  
   return (
     <div className="avatar-upload">
       <label>
