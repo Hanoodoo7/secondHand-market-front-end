@@ -4,7 +4,6 @@ import * as itemService from "../../services/itemService";
 import CommentForm from "../CommentForm/CommentForm";
 import Loader from "../Loading/loader";
 
-
 const ItemDetails = ({ user }) => {
   const { itemId } = useParams();
   const navigate = useNavigate();
