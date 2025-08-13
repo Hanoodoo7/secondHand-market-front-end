@@ -97,7 +97,10 @@ const handleUpdateItem = async (itemId, itemFormData) => {
 />
         <Route path='/items' element={<ItemList item={item} />} />
           <Route path='/items/:itemId' element={<ItemDetails user={user} handleDeleteItem={handleDeleteItem} />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route 
+  path="/profile" 
+  element={<Profile user={user} handleDeleteItem={handleDeleteItem} />} 
+/>
         <Route path='*' element={
           <div className="not-found">
             <h1>404</h1>
