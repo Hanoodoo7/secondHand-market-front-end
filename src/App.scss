@@ -849,3 +849,111 @@ h1, h2, h3, h4 {
 
 //
 //
+
+.comments-section {
+  padding: 2rem;
+  background: rgba(255, 248, 238, 0.6);
+  border-radius: 8px;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: #E2703A;
+    }
+  }
+
+  p {
+    color: #777;
+    font-style: italic;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  ul {
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  li {
+    margin-bottom: 1.2rem;
+  }
+}
+
+.comment-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  button {
+    @extend .vintage-button;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+
+    &.save-btn {
+      background-color: #E2703A;
+      color: white;
+
+      &:hover {
+        background-color: #9C3D54;
+      }
+    }
+
+    &.edit-btn {
+      background-color: #fff8f0;
+      color: #E2703A;
+      border: 1px solid #E2703A;
+
+      &:hover {
+        background-color: #E2703A;
+        color: white;
+      }
+    }
+
+    &.delete-btn {
+      background-color: #EEB76B;
+      color: #310B0B;
+
+      &:hover {
+        background-color: #E2703A;
+        color: white;
+      }
+    }
+
+    &:disabled {
+      background-color: #EEB76B;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.new-comment textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #EEB76B;
+  background: #fff8f0;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: #E2703A;
+    box-shadow: 0 0 0 2px rgba(226, 112, 58, 0.1);
+  }
+}
+
+.comments-section ul li p {
+  text-align: left; 
+}
