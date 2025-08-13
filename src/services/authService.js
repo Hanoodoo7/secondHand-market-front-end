@@ -11,7 +11,6 @@ const signUp = async (formData) => {
     })
     const data = await res.json()
 
-    // Checking if the response code was "ok"
     if (!res.ok) throw new Error(data.err || 'Something went wrong')
 
     if (data.token) {
@@ -21,7 +20,6 @@ const signUp = async (formData) => {
     }
 
   } catch (err) {
-    // throwing an error instead of console.logging
     throw err
   }
 }
@@ -37,9 +35,7 @@ const signIn = async (formData) => {
     })
     const data = await res.json()
     if (data.token) {
-      // save the token in local storage
       localStorage.setItem('token', data.token)
-      // returning the user info to use in our app
       const decodedToken = JSON.parse(atob(data.token.split('.')[1]))
       return decodedToken
     }
@@ -52,7 +48,6 @@ const signIn = async (formData) => {
 const getUser = () => {
   const token = localStorage.getItem('token')
   if (token) {
-    // return decoded token with user object
       const decodedToken = JSON.parse(atob(token.split('.')[1]))
       return decodedToken
   } else {
