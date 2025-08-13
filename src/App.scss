@@ -1155,3 +1155,44 @@ h1, h2, h3, h4 {
     }
   }
 }
+
+
+.profile-page {
+  .item-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    a,
+    button {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      background-color: #4f9ef7;
+      color: #fff;
+
+      &:hover {
+        background-color: #3578d4;
+      }
+    }
+
+    button {
+      background-color: #f74f4f;
+      color: #fff;
+
+      &:hover {
+        background-color: #d43535;
+      }
+    }
+  }
+}
