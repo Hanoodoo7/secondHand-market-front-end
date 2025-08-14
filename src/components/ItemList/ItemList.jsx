@@ -63,7 +63,7 @@ const ItemList = (props) => {
     );
   });
 
-  
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters(prev => ({ ...prev, [name]: value }));
@@ -197,6 +197,17 @@ const ItemList = (props) => {
                   <p className="item-price">{item.price} BDH</p>
                 </header>
                 <span className="item-category">{item.category}</span>
+                          <div className="item-image-list">
+                          {item.images ? (
+                            <img src={item.images} alt={item.title} />
+                          ) : (
+                            <img 
+                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs9gUXKwt2KErC_jWWlkZkGabxpeGchT-fyw&s" 
+                              alt="Placeholder"
+                              className="placeholder-image"
+                            />
+                          )}
+                        </div>
                 <div className="item-meta">
                   <p>Condition: {item.condition}</p>
                   <p className="item-status">Status: {item.status}</p>

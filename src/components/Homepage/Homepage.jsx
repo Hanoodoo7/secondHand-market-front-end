@@ -83,7 +83,7 @@ const Homepage = ({ user, items }) => {
             {item.images ? (
               <img src={item.images} alt={item.title} />
             ) : (
-              <div className="image-placeholder"></div>
+              <div className="image-placeholder">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs9gUXKwt2KErC_jWWlkZkGabxpeGchT-fyw&s</div>
             )}
           </div>
           <div className="item-details">
