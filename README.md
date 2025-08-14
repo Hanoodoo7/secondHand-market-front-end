@@ -1,6 +1,6 @@
 # Secondhand market site
-[Home Page](https://i.imgur.com/tIfbZrm.png)
-[Item List](https://i.imgur.com/TmqNt9Q.png)
+![Home Page](https://i.imgur.com/tIfbZrm.png)
+![Item List](https://i.imgur.com/TmqNt9Q.png)
 ## 🕹️ Description
 A website where users can buy and sell secondhand items.
 
